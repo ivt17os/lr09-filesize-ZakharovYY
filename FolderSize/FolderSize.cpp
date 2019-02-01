@@ -21,11 +21,14 @@ void dfs() {
  
     do {
         count++; // некоторые файлы не считаются??
-        _tprintf(TEXT("file #%d is <%s>\n"), count, res.cFileName);
  
-         //if (...) { // если это подпапка
-         //	здесь будет обход в глубину
-         //}
+		if ((res.dwFileAttributes & FILE_ATTRIBUTE_DIRECTORY) != 0 
+			&& _tcscmp(res.cFileName, TEXT("..")) != 0 
+			&& _tcscmp(res.cFileName, TEXT(".")) != 0) { // если это подпапка
+				_tprintf(TEXT("** "));
+			//	здесь будет обход в глубину
+         }
+		_tprintf(TEXT("file #%d is <%s>\n"), count, res.cFileName);
          //else {// это файл
 		size+=res.nFileSizeLow;
          //}
