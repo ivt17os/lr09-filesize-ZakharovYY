@@ -21,17 +21,20 @@ void dfs() {
  
     do {
         count++; // некоторые файлы не считаются??
+
  
 		if ((res.dwFileAttributes & FILE_ATTRIBUTE_DIRECTORY) != 0 
 			&& _tcscmp(res.cFileName, TEXT("..")) != 0 
 			&& _tcscmp(res.cFileName, TEXT(".")) != 0) { // если это подпапка
-				_tprintf(TEXT("** "));
+				SetCurrentDirectory(res.cFileName);
+				dfs();
+				SetCurrentDirectory(TEXT(".."));
 			//	здесь будет обход в глубину
-         }
+		}
+         else {// это файл
 		_tprintf(TEXT("file #%d is <%s>\n"), count, res.cFileName);
-         //else {// это файл
 		size+=res.nFileSizeLow;
-         //}
+         }
     } while (FindNextFile(hFind, &res) != 0);
     FindClose(hFind);
 }
