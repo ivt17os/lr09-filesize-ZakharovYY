@@ -23,12 +23,12 @@ void dfs() {
         count++; // некоторые файлы не считаются??
         _tprintf(TEXT("file #%d is <%s>\n"), count, res.cFileName);
  
-        // if (...) { // если это подпапка
-        // 	здесь будет обход в глубину
-        // }
-        // else {// это файл
-        // size+=res....
-        // }
+         //if (...) { // если это подпапка
+         //	здесь будет обход в глубину
+         //}
+         //else {// это файл
+		size+=res.nFileSizeLow;
+         //}
     } while (FindNextFile(hFind, &res) != 0);
     FindClose(hFind);
 }
